@@ -11,10 +11,6 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->welcome();
-});
-
-$app->get('url/create', 'UrlController@create');
-$app->post('url/create', 'UrlController@store');
+$app->get('/', 'UrlController@create');
+$app->post('/', 'UrlController@store');
 $app->get('{code}', 'RedirectController@go');

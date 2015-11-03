@@ -8,6 +8,12 @@ use App\Urls;
 
 class UrlController extends Base
 {
+
+    public function create()
+    {
+        return view('create');
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -21,17 +27,17 @@ class UrlController extends Base
             ];
         } else {
             $header = @get_headers($request->input('long_url'));
-            if($header[0] != 'HTTP/1.0 200 OK') {
+            if (! preg_match('/200/',$header[0])) {
                 $status = [
                     'status' => 'failed',
-                    'error'  => 'URL not found / invalid',
+                    'error'  => 'URL Not Found / invalid',
                 ];
             } else {
                 $host       = 'htp://'.env('HOSTNAME').'/';
                 $current    = Urls::where('long_url', $request->input('long_url'))->first();
                 
                 if($current) {
-                    $shortUrl     = $current->short_url;
+                    $shortUrl     = $host.$current->short_url;
                 } else {
                     $unique     = strtolower(str_random(3));
                     $shortUrl   = $host.$unique;
@@ -49,7 +55,6 @@ class UrlController extends Base
                 ];   
             }
         }
-        
         return response()->json($status)
                  ->setCallback($request->input('callback'));
     }

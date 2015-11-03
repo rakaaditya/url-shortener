@@ -33,7 +33,7 @@ class UrlController extends Base
                     'error'  => 'URL Not Found / invalid',
                 ];
             } else {
-                $host       = 'htp://'.env('HOSTNAME').'/';
+                $host       = 'http://'.env('HOSTNAME').'/';
                 $current    = Urls::where('long_url', $request->input('long_url'))->first();
                 
                 if($current) {

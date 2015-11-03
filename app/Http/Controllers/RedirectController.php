@@ -12,14 +12,11 @@ class RedirectController extends Base
     {
         $data = Urls::where('short_url', $shortCode)->first();
         
-        if($data) {
-            $url = $data->long_url;
+        if($data)
             return view('go', [
-                'url' => $url,
+                'url' => $data->long_url,
             ]);
-        } else {
-            $url = null;
+        else
             return view('notfound');
-        }
     }
 }

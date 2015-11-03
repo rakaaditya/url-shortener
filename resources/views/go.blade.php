@@ -30,18 +30,19 @@
 @endsection
 
 @section('bottom_js')
-<script type="text/javascript" src="//cdn-ck.gedrix.net/assets/js/jquery.plugin.js"></script> 
-<script type="text/javascript" src="//cdn-ck.gedrix.net/assets/js/jquery.countdown.js"></script>
 <script>
     $(document).ready(function(){
-        $('#counter').countdown({until: 5, format: 'S', expiryUrl: '{{$url}}', layout: '{sn}',
-            onTick: highlightLast5});
-
-        function highlightLast5(periods) {
-            if ($.countdown.periodsToSeconds(periods) === 2) {
-                $(this).addClass('highlight');
-            }
-        }
+        function redirect() {    
+            var count = 5;  
+            var interval = setInterval(function() {    
+                if(count > 0) { 
+                    $("#counter").text(count);   
+                } else {    
+                    clearInterval(interval);   
+                    window.location = '{{$url}}';    
+                }   count--;
+            }, 1000);}
+            redirect();
     });
 </script>
 @endsection
@@ -53,7 +54,7 @@
       <img src="http://cdn-ck.gedrix.net/assets/img/logo_gedrix.png" width="100">
     </div>
     <div class="col-lg-6 timer-container">
-        Redirecting in <span id="counter"></span>
+        Redirecting in <span id="counter">5</span>
     </div><!--/.navbar-collapse -->
   </div>
 </nav>

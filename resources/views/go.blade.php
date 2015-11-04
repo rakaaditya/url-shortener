@@ -3,6 +3,7 @@
 @section('title', 'Redirecting')
 
 @section('top_css')
+<link rel="canonical" href="{{$url}}" />
 <style>
     body {
       padding-top: 50px;

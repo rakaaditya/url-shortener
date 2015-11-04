@@ -42,8 +42,6 @@
 </nav>
 
 <div class="container">
-    <div class="iframe-outer" style="position:fixed;top:60px;bottom:0px;width:100%;">
-        @include('ads')
-    </div>
+    @include('ads')
 </div> <!-- /container -->
 @endsection

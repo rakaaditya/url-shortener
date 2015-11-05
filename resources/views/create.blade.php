@@ -55,11 +55,15 @@
             <button type="submit" class="btn btn-default" id="shorten">Shorten</button>
         </form>
     </div>
-    <div id="shorturl" style="text-align: center; display: none;"></div>
+    <div id="shorturl-container" style="text-align: center; display: none;">
+        <div id="shorturl"></div>
+        <button class="btn btn-primary" id="short-btn"><i class="fa fa-copy"></i> Copy</button>
+    </div>
 </div> <!-- /container -->
 @endsection
 
 @section('bottom_js')
+<script type="text/javascript" src="//cdn-ck.gedrix.net/assets/vendor/zclip/jquery.zclip.js"></script>
 <script>
 $(document).ready(function() {
     $('#short_form').submit(function(event) {
@@ -76,9 +80,18 @@ $(document).ready(function() {
                     $('#message').empty().html(data.error.long_url);
                 } else {
                     $('#form-container').hide();
-                    $('#shorturl').show().html(data.short_url);
+                    $('#shorturl-container').show();
+                    $('#shorturl').html(data.short_url);
+                    $('#short-btn').zclip({
+                        path: '//cdn-ck.gedrix.net/assets/vendor/zclip/ZeroClipboard.swf',
+                        copy: data.short_url,
+                        afterCopy: function() {
+                            $('#short-btn').attr('disabled','disabled').html('Copied!').delay(800).queue(function() {
+                                $(this).dequeue();
+                            });
+                        }
+                    });
                 }
-                
                 $('#shorten').removeAttr('disabled').html('Shorten');
                 setTimeout(function(){ 
                     $('#status_info').fadeOut('slow');

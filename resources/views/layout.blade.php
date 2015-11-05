@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn-ck.gedrix.net/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//assets.gedrix.net/gedrixcom/font-awesome/css/font-awesome.min.css" type="text/css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
